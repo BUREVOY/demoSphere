@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/demoSphere/static/css/main.c3fbef22.css",
-    "main.js": "/demoSphere/static/js/main.e2a0cede.js",
+    "main.js": "/demoSphere/static/js/main.678f1636.js",
     "static/css/244.fe67e1a2.chunk.css": "/demoSphere/static/css/244.fe67e1a2.chunk.css",
     "static/js/244.d9940074.chunk.js": "/demoSphere/static/js/244.d9940074.chunk.js",
     "static/css/134.fe87188e.chunk.css": "/demoSphere/static/css/134.fe87188e.chunk.css",
@@ -11,7 +11,7 @@
     "static/media/defautltUser.png": "/demoSphere/static/media/defautltUser.b9000249f1bd837a7614.png",
     "index.html": "/demoSphere/index.html",
     "main.c3fbef22.css.map": "/demoSphere/static/css/main.c3fbef22.css.map",
-    "main.e2a0cede.js.map": "/demoSphere/static/js/main.e2a0cede.js.map",
+    "main.678f1636.js.map": "/demoSphere/static/js/main.678f1636.js.map",
     "244.fe67e1a2.chunk.css.map": "/demoSphere/static/css/244.fe67e1a2.chunk.css.map",
     "244.d9940074.chunk.js.map": "/demoSphere/static/js/244.d9940074.chunk.js.map",
     "134.fe87188e.chunk.css.map": "/demoSphere/static/css/134.fe87188e.chunk.css.map",
@@ -20,6 +20,6 @@
   },
   "entrypoints": [
     "static/css/main.c3fbef22.css",
-    "static/js/main.e2a0cede.js"
+    "static/js/main.678f1636.js"
   ]
 }
