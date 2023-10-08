@@ -48,19 +48,19 @@ let Users: React.FC<Props> = (props) => {
     dispatch(followAPI(userId) as unknown as AnyAction);
   };
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    // window.history.replaceState(null, '', url.hash);
-    window.history.pushState(
-      null,
-      '',
-      `${url.hash}?term=${filter.term}&friend=${filter.friend}&page=${pageSelected}`,
-    );
+  // useEffect(() => {
+  //   const url = new URL(window.location.href);
+  //   // window.history.replaceState(null, '', url.hash);
+  //   window.history.pushState(
+  //     null,
+  //     '',
+  //     `${url.hash}?term=${filter.term}&friend=${filter.friend}&page=${pageSelected}`,
+  //   );
 
-    return () => {
-      window.history.replaceState(null, '', url.hash);
-    };
-  }, [filter, pageSelected]);
+  //   return () => {
+  //     window.history.replaceState(null, '', url.hash);
+  //   };
+  // }, [filter, pageSelected]);
 
   useEffect(() => {
     dispatch(getUsers(pageSelected, pageSize, filter));
