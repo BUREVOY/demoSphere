@@ -1,0 +1,24 @@
+.postItem {
+  display: grid;
+  color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  margin: 16px;
+  grid-area: 'content';
+}
+.allPost {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  grid-template-rows: 1fr;
+}
+.postImg {
+  display: grid;
+  grid-area: 'image';
+}
+.allPost img {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  place-self: center;
+}

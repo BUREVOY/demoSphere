@@ -1,0 +1,29 @@
+.nav {
+  grid-area: nav;
+  background-color: #2400c7;
+  font-family: 'Russo One', sans-serif;
+  font-size: 26px;
+  border-radius: 12px;
+}
+.item {
+  padding: 6px;
+  margin: 12px;
+  color: rgb(238, 247, 255);
+}
+
+.link {
+  color: rgb(238, 247, 255);
+  transition-duration: 0.5s;
+}
+.active {
+  color: rgb(182, 186, 240);
+}
+
+.link:hover {
+  color: rgb(200, 230, 255);
+  cursor: pointer;
+  transition: 0.5s;
+  letter-spacing: 1px;
+}
+
+/* font-family: 'Press Start 2P', cursive; */

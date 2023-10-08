@@ -1,0 +1,19 @@
+.content {
+  grid-area: content;
+  background-color: #2400c7;
+  border-radius: 12px;
+  padding: 12px;
+  /* font-family: 'Russo One', sans-serif; */
+}
+.login {
+  font-size: 36px;
+  font-family: 'Montserrat';
+  font-weight: 400;
+  color: rgb(238, 247, 255);
+}
+.errorLog {
+  display: inline-block;
+  padding: 8px;
+  border: 3px solid red;
+  color: rgb(255, 33, 25);
+}

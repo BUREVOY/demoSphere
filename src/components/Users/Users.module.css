@@ -1,0 +1,16 @@
+.allUsers {
+  display: grid;
+  grid-area: content;
+  grid-template-columns: 1fr;
+  background-color: #2400c7;
+  border-radius: 12px;
+  padding: 12px;
+  /* font-family: 'Russo One', sans-serif; */
+  font-family: 'Montserrat';
+}
+
+.item {
+  padding: 6px;
+  margin: 12px;
+  color: rgb(238, 247, 255);
+}

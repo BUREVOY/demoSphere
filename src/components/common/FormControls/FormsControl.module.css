@@ -1,0 +1,17 @@
+.formControl {
+  display: grid;
+}
+
+.error {
+  display: imline;
+
+  color: black;
+}
+.errorMessege {
+  font-size: 20px;
+  font-weight: 900;
+  color: red;
+}
+
+/* .errorArea {
+} */

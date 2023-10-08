@@ -1,0 +1,33 @@
+.header {
+  display: grid;
+  grid-area: header;
+  background-color: rgb(212, 212, 212);
+  color: #0021f5;
+  border-radius: 12px;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.inner {
+  place-self: center start;
+  font-family: 'Russo One', sans-serif;
+  font-size: 36px;
+  margin-left: 12px;
+}
+
+.active {
+  transition-duration: 0.5s;
+}
+
+.active:hover {
+  color: rgb(139, 139, 139);
+  letter-spacing: 2px;
+}
+.block_content {
+  place-self: center end;
+  margin-right: 12px;
+}
+.login {
+  margin-right: 20px;
+}
