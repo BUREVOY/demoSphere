@@ -6,6 +6,11 @@
   padding: 0;
   margin: 0;
 }
+html {
+  background-color: #1D1D1D;
+}
+
+/*  
 .App {
   display: grid;
   grid-template-columns: 2fr 10fr;
@@ -19,10 +24,8 @@
   column-gap: 12px;
   row-gap: 15px;
 }
-html {
-  background-color: rgb(141, 141, 141);
-}
+
 
 a {
   text-decoration: none;
-}
+} */

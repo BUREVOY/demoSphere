@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import s from './Users.module.css';
-
 import Paginator from '../common/Paginator/Paginator';
 import User from './User/User';
 import { Field, Form, Formik } from 'formik';
@@ -21,6 +20,8 @@ import {
 } from '../../redux/userSelector';
 import { AppDispatch } from '../../redux/reduxStore';
 import { AnyAction } from 'redux';
+import { useLocation } from 'react-router-dom';
+import parseParams from '../../utils/parseParams';
 
 type Props = {};
 
@@ -33,6 +34,7 @@ let Users: React.FC<Props> = (props) => {
   const filter = useSelector(getUsersFilter);
 
   const dispatch: AppDispatch = useDispatch();
+  const location = useLocation(); // pathname = /users search = ?term=&friend=null&page=1
 
   const onPageChanged = (p: number) => {
     dispatch(getUsers(p, pageSize, filter)); //as unknown as AnyAction
@@ -48,24 +50,47 @@ let Users: React.FC<Props> = (props) => {
     dispatch(followAPI(userId) as unknown as AnyAction);
   };
 
-  // useEffect(() => {
-  //   const url = new URL(window.location.href);
-  //   // window.history.replaceState(null, '', url.hash);
-  //   window.history.pushState(
-  //     null,
-  //     '',
-  //     `${url.hash}?term=${filter.term}&friend=${filter.friend}&page=${pageSelected}`,
-  //   );
-
-  //   return () => {
-  //     window.history.replaceState(null, '', url.hash);
-  //   };
-  // }, [filter, pageSelected]);
-
   useEffect(() => {
-    dispatch(getUsers(pageSelected, pageSize, filter));
+    //saving first render query string in redux and dispatching search
+    let parsed = parseParams(location.search);
+    let actualPage = pageSelected;
+    let actualFilter = filter;
+
+    if (!!parsed.page) {
+      actualPage = +parsed.page;
+    }
+    if (!!parsed.term) {
+      actualFilter = { ...actualFilter, term: parsed.term };
+    }
+    if (!!parsed.friend) {
+      actualFilter = { ...actualFilter, friend: parsed.friend };
+    }
+    dispatch(getUsers(actualPage, pageSize, actualFilter));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    //creating url for search when filter, pageSelected change
+    const url = new URL(window.location.href);
+    // window.history.replaceState(null, '', url.hash);   ?term=&friend=null&page=1
+    let query = '?';
+    if (!!filter.term) query += `term=${filter.term}`;
+    if (filter.friend !== null) query += `&friend=${filter.friend}`;
+    if (pageSelected !== 1) query += `&page=${pageSelected}`;
+    if (query === '?') query = '';
+    window.history.pushState(
+      null,
+      '',
+      `${url.hash}${query}`, //${url.hash}?term=${filter.term}&friend=${filter.friend}&page=${pageSelected}
+    );
+
+    return () => {
+      if (window.location.hash.includes('users')) {
+        //if we are on page users
+        window.history.replaceState(null, '', '#/users');
+      }
+    };
+  }, [filter, pageSelected]);
 
   return (
     <div className={s.allUsers}>
@@ -99,12 +124,15 @@ type FormProps = {
   onFilterChanged: (filter: FilterType) => void;
 };
 
+type FriendType = 'true' | 'false' | 'null';
 type FormType = {
   term: string;
-  friend: 'true' | 'false' | 'null';
+  friend: FriendType;
 };
 
 const UsersForm: React.FC<FormProps> = (props) => {
+  const filter = useSelector(getUsersFilter);
+
   const submit = (
     values: FormType,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void },
@@ -131,7 +159,11 @@ const UsersForm: React.FC<FormProps> = (props) => {
   return (
     <>
       <Formik
-        initialValues={{ term: '', friend: 'null' as const }}
+        enableReinitialize={true} //чтобы при изменении initialvalues, в поле формы отобращалось значение из поисковой строки
+        initialValues={{
+          term: filter.term,
+          friend: String(filter.friend) as FriendType,
+        }}
         validate={usersFormValidation}
         onSubmit={submit}
       >

@@ -17,17 +17,20 @@
 }
 
 .active {
+  color: aliceblue;
   transition-duration: 0.5s;
+  cursor: pointer;
 }
 
 .active:hover {
-  color: rgb(139, 139, 139);
   letter-spacing: 2px;
 }
 .block_content {
-  place-self: center end;
+  /* place-self: center end; */
+
   margin-right: 12px;
 }
 .login {
   margin-right: 20px;
+  color: aliceblue;
 }

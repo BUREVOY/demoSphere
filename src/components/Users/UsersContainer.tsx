@@ -6,12 +6,11 @@ import { getIsFetching } from '../../redux/userSelector';
 import { Navigate } from 'react-router-dom';
 import { getisAuth } from '../../redux/authSelector';
 
-type Props = {};
-
-const UsersAPIContainer: React.FC<Props> = (props) => {
+const UsersAPIContainer: React.FC = () => {
   const isFetching = useSelector(getIsFetching);
   const isAuth = useSelector(getisAuth);
   if (!isAuth) return <Navigate to={'/login'} />;
+
   return (
     <>
       {isFetching ? <Loader /> : null}

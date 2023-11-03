@@ -54,6 +54,7 @@ const ProfileInfo: React.FC<Props> = (props) => {
           <img
             src={props.profile.photos.large || defaultAvatar}
             alt="nice avatar"
+            style={{ height: '300px' }}
           />
         </div>
         {props.isOwner && <input type="file" onChange={handleUploadPhoto} />}

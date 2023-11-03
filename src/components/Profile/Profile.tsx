@@ -3,6 +3,7 @@ import MypostsContainer from './Myposts/MypostsContainer';
 import s from './Profile.module.css';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import { profileType } from '../../Types/types';
+import { Button } from 'antd';
 
 type MapStateProps = {
   profile: profileType | null;
@@ -28,6 +29,7 @@ const Profile: React.FC<MapStateProps & MapDispatch> = ({
 }) => {
   return (
     <div className={s.content}>
+      <Button type={'primary'}>cscscd</Button>
       <ProfileInfo
         uploadPhoto={uploadPhoto}
         isOwner={isOwner}
