@@ -28,6 +28,7 @@ const Login: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   let onSubmit = (formData: any) => {
+    console.log(formData);
     dispatch(
       login(
         formData.email,
@@ -44,7 +45,6 @@ const Login: React.FC = () => {
 
   return (
     <div className={s.content}>
-      моя логинка
       <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
     </div>
   );

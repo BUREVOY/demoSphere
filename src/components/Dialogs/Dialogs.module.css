@@ -2,14 +2,9 @@
   display: grid;
   grid-area: content;
   grid-template-columns: 2fr 10fr;
-  /* background-color: #2400c7;
-  background-color: #1D1D1D; */
-  background: rgb(29, 29, 29);
-  background: linear-gradient(
-    135deg,
-    rgba(29, 29, 29, 1) 0%,
-    rgba(0, 7, 36, 1) 100%
-  );
+
+  background-color: #212121;
+
   border-radius: 12px;
   padding: 12px;
 }

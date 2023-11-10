@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import s from './User.module.css';
 import { userItem } from '../../../Types/types';
+import { Button, Card } from 'antd';
+import Meta from 'antd/es/card/Meta';
 // import defaultUser from '../../../assets/images/defautltUser.png';
 const defaultUser = require('../../../assets/images/defautltUser.png');
 
@@ -20,11 +22,11 @@ const User: React.FC<Props> = ({
 }) => {
   return (
     <div key={item.id} className={s.singleUser}>
-      <div>
+      {/* <div>
         <div>
           <NavLink to={'/profile/' + item.id}>
             <img
-              src={item.photos.small !== null ? item.photos.small : defaultUser}
+              src={item.photos.large !== null ? item.photos.large : defaultUser}
               alt="avatar"
               className={s.img}
             />
@@ -60,7 +62,79 @@ const User: React.FC<Props> = ({
       <div>
         <div>{item.name}</div>
         <div>{item.status} </div>
-      </div>
+      </div> */}
+
+      <Card
+        hoverable
+        style={{
+          width: 280,
+          margin: '5px 20px 0 20px',
+          color: 'aliceblue',
+          background: '#252525',
+          border: '0 solid #212121',
+        }}
+        cover={
+          <NavLink to={'/profile/' + item.id}>
+            <img
+              alt="example"
+              src={item.photos.large !== null ? item.photos.large : defaultUser}
+              style={{ width: '100%', background: '#252525' }}
+            />
+          </NavLink>
+        }
+      >
+        <div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
+            <div>
+              <NavLink to={'/profile/' + item.id}>{item.name}</NavLink>
+            </div>
+            <div>
+              {item.followed ? (
+                <Button
+                  type="primary"
+                  disabled={Boolean(
+                    isFollowingInProgress.find((id) => id === item.id),
+                  )}
+                  onClick={() => {
+                    unfollow(item.id);
+                  }}
+                  danger
+                >
+                  ОТПИСАТЬСЯ
+                </Button>
+              ) : (
+                <Button
+                  type="primary"
+                  disabled={Boolean(
+                    isFollowingInProgress.find((id) => id === item.id),
+                  )}
+                  onClick={() => {
+                    follow(item.id);
+                  }}
+                >
+                  ПОДПИСАТЬСЯ
+                </Button>
+              )}
+            </div>
+          </div>
+
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              margin: '10px 0 0 0',
+            }}
+          >
+            {item.status}
+          </div>
+        </div>
+      </Card>
     </div>
   );
 };

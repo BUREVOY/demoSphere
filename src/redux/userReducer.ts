@@ -6,7 +6,7 @@ import { AppStateType, InferActionsTypes } from './reduxStore';
 let initialState = {
   usersItems: [] as Array<userItem>,
   totalUsers: 19,
-  pageSize: 4,
+  pageSize: 6, //2 2 2
   pageSelected: 1,
   isFetching: false,
   filter: {

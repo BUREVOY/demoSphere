@@ -1,6 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import Loader from '../Loader/Loader';
 import s from './Paginator.module.css';
+import { Button } from 'antd';
+import { ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 
 type Props = {
   totalUsers: number;
@@ -50,26 +52,49 @@ const Paginator: React.FC<Props> = (props) => {
     return (
       <div className={s.countPages}>
         {portionNumber[0] !== 1 ? (
-          <button onClick={prevPortion}> &lt; </button>
+          <Button
+            onClick={prevPortion}
+            type="primary"
+            style={{ alignSelf: 'center' }}
+          >
+            <ArrowLeftOutlined />
+          </Button>
         ) : (
-          <button onClick={prevPortion} disabled>
-            &lt;
-          </button>
+          <Button
+            onClick={prevPortion}
+            style={{ alignSelf: 'center', background: '#515151' }}
+            disabled
+          >
+            <ArrowLeftOutlined />
+          </Button>
         )}
 
         {portionNumber.map((p) => (
-          <div
+          <Button
             key={p}
             className={props.pageSelected === p ? s.active : s.link}
+            type="primary"
+            // style={{
+            //   display: 'flex',
+            //   justifyContent: 'center',
+            //   width: '100%',
+            // }}
             onClick={(e) => {
               props.onPageChanged(p);
             }}
           >
             {p}
-          </div>
+          </Button>
         ))}
 
-        <button onClick={nextPortion}> &gt; </button>
+        <Button
+          onClick={nextPortion}
+          type="primary"
+          style={{ alignSelf: 'center' }}
+        >
+          {' '}
+          <ArrowRightOutlined />
+        </Button>
 
         {/* <button onClick={next}>{val}</button> */}
       </div>

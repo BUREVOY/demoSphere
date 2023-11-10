@@ -1,40 +1,81 @@
 import React from 'react';
-import s from './Navbar.module.css';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Sider from 'antd/es/layout/Sider';
+import { Menu } from 'antd';
+import {
+  UserOutlined,
+  MessageOutlined,
+  UsergroupAddOutlined,
+  UnorderedListOutlined,
+} from '@ant-design/icons';
 
 const Navbar: React.FC = () => {
+  let selectedKey = localStorage.getItem('selectedMenuItem') || '1';
+
+  function handleclick(e: any) {
+    localStorage.setItem('selectedMenuItem', e.key);
+  }
   return (
-    <nav className={s.nav}>
-      <div className={s.item}>
-        <NavLink
-          to="/profile"
-          className={(navData) => (navData.isActive ? s.active : s.link)}
+    <Sider
+      width={220}
+      style={{
+        background: '#1D1D1D',
+        padding: '12px 6px 6px 12px',
+      }}
+    >
+      {
+        //colorBgContainer
+      }
+      {/* <Menu
+      mode="inline"
+      defaultSelectedKeys={['1']}
+      defaultOpenKeys={['sub1']}
+      style={{ height: '100%', borderRight: 0 }}
+      items={items2}
+    /> */}
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[selectedKey]}
+        style={{ padding: '8px', borderRadius: '16px', background: '#212121' }}
+      >
+        {/*defaultSelectedKeys={['1']}*/}
+        <Menu.Item
+          key="1"
+          icon={<UserOutlined />}
+          onClick={handleclick}
+          style={{ fontFamily: 'Montserrat' }}
         >
-          Профиль
-        </NavLink>
-      </div>
-      <div className={s.item}>
-        <NavLink
-          to="/dialogs"
-          className={(navData) => (navData.isActive ? s.active : s.link)}
+          <Link to="/profile">Профиль</Link>
+        </Menu.Item>
+        <Menu.Item
+          key="2"
+          icon={<UnorderedListOutlined />}
+          onClick={handleclick}
+          style={{ fontFamily: 'Montserrat' }}
         >
-          {/*это сделано, чтобы каждый раз не обновлялась страницу*/}
-          Сообщения
-        </NavLink>
-      </div>
-      <div className={s.item}>
-        <NavLink
-          to="/users"
-          className={(navData) => (navData.isActive ? s.active : s.link)}
+          <Link to="/dialogs">Сообщения</Link>
+        </Menu.Item>
+        <Menu.Item
+          key="3"
+          icon={<UsergroupAddOutlined />}
+          onClick={handleclick}
+          style={{ fontFamily: 'Montserrat' }}
         >
-          {/*это сделано, чтобы каждый раз не обновлялась страницу*/}
-          Друзья
-        </NavLink>
-      </div>
-      <div className={s.item}>Сообщества</div>
-    </nav>
+          <Link to="/users">Пользователи</Link>
+        </Menu.Item>
+        <Menu.Item
+          key="4"
+          icon={<MessageOutlined />}
+          onClick={handleclick}
+          style={{ fontFamily: 'Montserrat' }}
+        >
+          <Link to="/chat">Чат</Link>
+        </Menu.Item>
+      </Menu>
+    </Sider>
   );
 };
-
+//className={(navData) => (navData.isActive ? s.active : s.link)}
 export default Navbar;
 //  activeClassName={s.activeLink}className={s.link}

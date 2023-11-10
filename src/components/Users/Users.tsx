@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import s from './Users.module.css';
 import Paginator from '../common/Paginator/Paginator';
 import User from './User/User';
-import { Field, Form, Formik } from 'formik';
+// import { Field, Form, Formik } from 'formik';
 import {
   FilterType,
   getUsers,
@@ -22,6 +22,8 @@ import { AppDispatch } from '../../redux/reduxStore';
 import { AnyAction } from 'redux';
 import { useLocation } from 'react-router-dom';
 import parseParams from '../../utils/parseParams';
+import { Button, Form, Radio, Select, Space } from 'antd';
+import FormItem from 'antd/es/form/FormItem';
 
 type Props = {};
 
@@ -101,16 +103,23 @@ let Users: React.FC<Props> = (props) => {
         pageSelected={pageSelected}
         onPageChanged={onPageChanged}
       />
-      <div className={s.item}>привеет жестокий мир</div>
-      {usersItems.map((item) => (
-        <User
-          key={item.id}
-          item={item}
-          isFollowingInProgress={isFollowingInProgress}
-          unfollow={unfollow}
-          follow={follow}
-        />
-      ))}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr 1fr',
+          gridTemplateRows: '1fr 1fr',
+        }}
+      >
+        {usersItems.map((item) => (
+          <User
+            key={item.id}
+            item={item}
+            isFollowingInProgress={isFollowingInProgress}
+            unfollow={unfollow}
+            follow={follow}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -134,7 +143,7 @@ const UsersForm: React.FC<FormProps> = (props) => {
   const filter = useSelector(getUsersFilter);
 
   const submit = (
-    values: FormType,
+    values: any, //FormType
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void },
   ) => {
     // setTimeout(() => {
@@ -142,6 +151,7 @@ const UsersForm: React.FC<FormProps> = (props) => {
     //   setSubmitting(false);
     // }, 400);
     //это чтобы "false" привести к false
+    console.log(values);
     const filter = {
       term: values.term,
       friend:
@@ -156,9 +166,19 @@ const UsersForm: React.FC<FormProps> = (props) => {
     setSubmitting(false);
   };
 
+  function handleSubmit(e: any) {
+    // let obj = {
+    //   email: formData.target[0].value,
+    //   pass: formData.target[1].value,
+    //   rememder: formData.target[2].checked,
+    //   captcha: formData.captcha,
+    // };
+    console.log(e);
+  }
+
   return (
     <>
-      <Formik
+      {/* <Formik
         enableReinitialize={true} //чтобы при изменении initialvalues, в поле формы отобращалось значение из поисковой строки
         initialValues={{
           term: filter.term,
@@ -175,12 +195,43 @@ const UsersForm: React.FC<FormProps> = (props) => {
               <option value="true">Подписчики</option>
               <option value="false">Не подписчики</option>
             </Field>
+
             <button type="submit" disabled={isSubmitting}>
               Поиск
             </button>
           </Form>
         )}
-      </Formik>
+      </Formik> */}
+
+      <Form
+        // name="basic"
+        // labelCol={{ span: 8 }}
+        // wrapperCol={{ span: 16 }}
+        // style={{ maxWidth: 1200, fontFamily: 'Montserrat' }}
+        // initialValues={{ friend: 'null' }}
+        // autoComplete="off"
+        layout="inline"
+        // onSubmitCapture={handleSubmit}
+        onFinish={handleSubmit}
+
+        // onSubmit={props.handleSubmit}
+      >
+        <Form.Item name="friend">
+          <Radio.Group>
+            <Radio.Button value="null">
+              <span style={{ color: 'black' }}>все</span>
+            </Radio.Button>
+            <Radio.Button value="true">
+              <span style={{ color: 'black' }}>Подписчики</span>
+            </Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            Отправить
+          </Button>
+        </Form.Item>
+      </Form>
     </>
   );
 };

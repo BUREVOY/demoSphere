@@ -1,7 +1,7 @@
 .nav {
   grid-area: nav;
   background-color: #2400c7;
-  font-family: 'Russo One', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   font-size: 26px;
   border-radius: 12px;
 }
@@ -9,6 +9,7 @@
   padding: 6px;
   margin: 12px;
   color: rgb(238, 247, 255);
+  font-family: 'Times';
 }
 
 .link {

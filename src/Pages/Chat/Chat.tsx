@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import s from './Chat.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   sendNewMessage,
@@ -6,6 +7,9 @@ import {
   stopListeningNewMessages,
 } from '../../redux/chatReducer';
 import { AppDispatch, AppStateType } from '../../redux/reduxStore';
+import { NavLink, Navigate } from 'react-router-dom';
+import { Button, Input, Space } from 'antd';
+import { getisAuth } from '../../redux/authSelector';
 const defaultUser = require('../../assets/images/defautltUser.png');
 // /*
 // let wsChannel = new WebSocket(
@@ -23,122 +27,6 @@ export type ChatType = {
   userName: string;
 };
 
-// const ChatPage: React.FC = () => {
-//   let [ws, setws] = useState<null | WebSocket>(null);
-
-//   useEffect(() => {
-//     let ws: WebSocket;
-//     let closeHandler = () => {
-//       console.log('close');
-//       setTimeout(createWS, 3000);
-//     };
-//     function createWS() {
-//       ws?.removeEventListener('close', closeHandler);
-//       ws?.close();
-
-//       ws = new WebSocket(
-//         'wss://social-network.samuraijs.com/handlers/ChatHandler.ashx',
-//       );
-
-//       ws.addEventListener('close', closeHandler);
-
-//       setws(ws);
-//     }
-//     createWS();
-
-//     return () => {
-//       ws.removeEventListener('close', closeHandler);
-//       ws.close();
-//     };
-//   }, []);
-
-//   return (
-//     <>
-//       <Messages ws={ws} />
-//       <AddMessageForm ws={ws} />
-//     </>
-//   );
-// };
-// const AddMessageForm: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
-//   let [message, setMessage] = useState('');
-//   let [ready, setReady] = useState<'pending' | 'ready'>('pending');
-
-//   useEffect(() => {
-//     function openHandler() {
-//       setReady('ready');
-//     }
-
-//     ws?.addEventListener('open', openHandler);
-
-//     return () => {
-//       ws?.removeEventListener('open', openHandler);
-//     };
-//   }, [ws]);
-
-//   let sendMessage = () => {
-//     if (!message) {
-//       return;
-//     }
-//     ws?.send(message);
-//     setMessage('');
-//   };
-//   return (
-//     <>
-//       <textarea
-//         name="chatArea"
-//         id="t"
-//         cols={30}
-//         rows={2}
-//         value={message}
-//         onChange={(e) => setMessage(e.currentTarget.value)}
-//       ></textarea>
-//       <button disabled={ready !== 'ready' || ws === null} onClick={sendMessage}>
-//         Отправить
-//       </button>
-//     </>
-//   );
-// };
-// const Messages: React.FC<{ ws: WebSocket | null }> = ({ ws }) => {
-//   let [messages, setMessages] = useState<ChatType[]>([]);
-
-//   function messageHandler(e: MessageEvent) {
-//     // console.log(e);
-//     setMessages((prevMessages) => [...prevMessages, ...JSON.parse(e.data)]);
-//   }
-
-//   useEffect(() => {
-//     console.log('render', typeof ws);
-//     ws?.addEventListener('message', messageHandler);
-//     return () => {
-//       ws?.removeEventListener('message', messageHandler);
-//     };
-//   }, [ws]);
-
-//   return (
-//     <>
-//       {messages.map((m, i) => (
-//         <Message key={i} message={m} />
-//       ))}
-//     </>
-//   );
-// };
-// const Message: React.FC<{ message: ChatType }> = ({ message }) => {
-//   return (
-//     <div style={{ color: 'aliceblue' }}>
-//       <img
-//         src={message.photo || defaultUser}
-//         alt="avatar"
-//         height="50px"
-//         width="50px"
-//       />
-//       <b>{message.userName}</b>
-//       <br />
-//       {message.message}
-//       <hr />
-//     </div>
-//   );
-// };
-
 const ChatPage: React.FC = () => {
   let dispatch: AppDispatch = useDispatch();
 
@@ -147,8 +35,10 @@ const ChatPage: React.FC = () => {
     return () => {
       dispatch(stopListeningNewMessages());
     };
-  }, []);
+  }, [dispatch]);
 
+  const isAuth = useSelector(getisAuth);
+  if (!isAuth) return <Navigate to={'/login'} />;
   return (
     <>
       <Messages />
@@ -175,7 +65,7 @@ const AddMessageForm: React.FC = () => {
 
   return (
     <>
-      <textarea
+      {/* <textarea
         name="chatArea"
         id="t"
         cols={30}
@@ -188,12 +78,31 @@ const AddMessageForm: React.FC = () => {
         onClick={sendMessageHandler}
       >
         Отправить
-      </button>
+      </button> */}
+      <div style={{ maxWidth: '700px' }}>
+        <Space.Compact
+          style={{ width: '100%', padding: '8px 8px 8px 0 ', margin: '4px' }}
+        >
+          <Input
+            defaultValue=""
+            value={message}
+            onChange={(e) => setMessage(e.currentTarget.value)}
+          />
+          <Button
+            type="primary"
+            disabled={status === 'pending' || !navigator.onLine}
+            onClick={sendMessageHandler}
+          >
+            ОТПРАВИТЬ
+          </Button>
+        </Space.Compact>
+      </div>
     </>
   );
 };
 ////////////////////////// MessageS //////////////////////////////////
 const Messages: React.FC = () => {
+  // TODO: Remove useEffect and useState
   let messages = useSelector((state: AppStateType) => state.chat.messages);
 
   let lastDiv = useRef<HTMLDivElement>(null);
@@ -220,11 +129,22 @@ const Messages: React.FC = () => {
     }
   }, [messages, isAutoScroll]);
 
+  // let [a, setA] = useState<number>(10);
+
+  // let aHandler = () => {
+  //   setA((a) => a + 1);
+  //   setA((a) => a + 1);
+  // };
+
   return (
     <div
-      style={{ overflow: 'auto', maxHeight: '500px' }}
+      style={{ overflow: 'auto', maxHeight: '700px', maxWidth: '700px' }}
       onScroll={scrollHandler}
+      className={s.messages}
     >
+      {/* <div onClick={aHandler} style={{ fontSize: '30px' }}>
+        {a}
+      </div> */}
       {messages.map((m, i) => (
         <Message key={i} message={m} />
       ))}
@@ -235,18 +155,42 @@ const Messages: React.FC = () => {
 /////////////////////////////// Message /////////////////////////////////////////////////
 const Message: React.FC<{ message: ChatType }> = React.memo(({ message }) => {
   return (
-    <div style={{ color: 'aliceblue' }}>
-      <img
-        src={message.photo || defaultUser}
-        alt="avatar"
-        height="50px"
-        width="50px"
-      />
-      <b>{message.userName}</b>
-      <br />
-      {message.message}
-      <hr />
-    </div>
+    <>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          color: 'aliceblue',
+          background: '#212121',
+          padding: '8px',
+          margin: '4px',
+          borderRadius: '16px',
+        }}
+      >
+        <div>
+          <NavLink to={'/profile/' + message.userId}>
+            <img
+              src={message.photo || defaultUser}
+              style={{ borderRadius: '50%' }}
+              alt="avatar"
+              height="50px"
+              width="50px"
+            />
+          </NavLink>
+        </div>
+
+        <div
+          style={{
+            alignSelf: 'center',
+            marginLeft: '10px',
+            fontFamily: 'Montserrat',
+          }}
+        >
+          {message.message}
+        </div>
+      </div>
+    </>
   );
 });
+
 export default ChatPage;

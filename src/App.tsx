@@ -7,7 +7,6 @@ import {
   useParams,
   HashRouter,
   Navigate,
-  Link,
 } from 'react-router-dom';
 
 import UsersContainer from './components/Users/UsersContainer';
@@ -20,11 +19,12 @@ import { initializeApp } from './redux/appReducer';
 import Loader from './components/common/Loader/Loader';
 import store, { AppStateType } from './redux/reduxStore';
 import NotFound from './components/errorPages/NotFound';
-import { Breadcrumb, Layout, Menu } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import HeaderApp from './components/Header/HeaderApp';
+import { Layout } from 'antd';
 
-const { Content, Sider } = Layout;
+import HeaderApp from './components/Header/HeaderApp';
+import Navbar from './components/Navbar/Navbar';
+
+const { Content } = Layout;
 // import Login from "./components/Login/Login";
 // import DialogsContainer from "./components/Dialogs/DialogsContainer";
 let DialogsContainer = React.lazy(
@@ -50,75 +50,22 @@ class App extends React.Component<MapProps & DispProps> {
   componentWillUnmount() {
     window.removeEventListener('unhandledrejection', this.handleRejections);
   }
-  handleclick(e: any) {
-    localStorage.setItem('selectedMenuItem', e.key);
-  }
 
   render() {
-    let selectedKey = localStorage.getItem('selectedMenuItem') || '1';
-
     if (!this.props.initialized) {
       <Loader />;
     } else {
       return (
-        //   <Navbar />
-
         <div className="App">
-          <Layout>
+          <Layout style={{ background: '#1D1D1D' }}>
+            {/* <div className="scrollbar" id="style-1">
+              <div className="force-overflow"></div>
+            </div> */}
             <HeaderApp />
             <Layout>
-              <Sider
-                width={200}
-                style={{ background: '#1D1D1D', padding: '12px 6px 6px 12px' }}
-              >
-                {
-                  //colorBgContainer
-                }
-                {/* <Menu
-                  mode="inline"
-                  defaultSelectedKeys={['1']}
-                  defaultOpenKeys={['sub1']}
-                  style={{ height: '100%', borderRight: 0 }}
-                  items={items2}
-                /> */}
-                <Menu theme="dark" mode="inline" selectedKeys={[selectedKey]}>
-                  {/*defaultSelectedKeys={['1']}*/}
-                  <Menu.Item
-                    key="1"
-                    icon={<UserOutlined />}
-                    onClick={this.handleclick}
-                  >
-                    <Link to="/profile">Профиль</Link>
-                  </Menu.Item>
-                  <Menu.Item
-                    key="2"
-                    icon={<UserOutlined />}
-                    onClick={this.handleclick}
-                  >
-                    <Link to="/dialogs">Сообщения</Link>
-                  </Menu.Item>
-                  <Menu.Item
-                    key="3"
-                    icon={<UserOutlined />}
-                    onClick={this.handleclick}
-                  >
-                    <Link to="/users">Пользователи</Link>
-                  </Menu.Item>
-                  <Menu.Item
-                    key="4"
-                    icon={<UserOutlined />}
-                    onClick={this.handleclick}
-                  >
-                    <Link to="/chat">Чат</Link>
-                  </Menu.Item>
-                </Menu>
-              </Sider>
+              <Navbar />
+
               <Layout style={{ padding: '0 24px 24px', background: '#1D1D1D' }}>
-                <Breadcrumb style={{ margin: '16px 0', color: 'aliceblue' }}>
-                  <Breadcrumb.Item>Home</Breadcrumb.Item>
-                  <Breadcrumb.Item>List</Breadcrumb.Item>
-                  <Breadcrumb.Item>App</Breadcrumb.Item>
-                </Breadcrumb>
                 <Content
                   style={{
                     padding: 12,
