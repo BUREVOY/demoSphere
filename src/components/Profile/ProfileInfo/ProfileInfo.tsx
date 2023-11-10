@@ -7,6 +7,10 @@ import EditProfileData, {
 } from './EditProfileData/EditProfileData';
 import { reduxForm } from 'redux-form';
 import { profileType } from '../../../Types/types';
+import Dragger from 'antd/es/upload/Dragger';
+import { InboxOutlined, SettingOutlined } from '@ant-design/icons';
+import { Image } from 'antd';
+
 const defaultAvatar = require('../../../assets/images/defautltUser.png');
 
 let EditProfileDataRedux = reduxForm<profileType, PropsEditProfile>({
@@ -28,7 +32,15 @@ const ProfileInfo: React.FC<Props> = (props) => {
 
   let handleUploadPhoto = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files?.length) {
+      console.log(e.target.files[0]);
       props.uploadPhoto(e.target.files[0]);
+    }
+  };
+  let handleAntUploadPhoto = (e: any) => {
+    debugger;
+    if (e.file) {
+      console.log(e.file);
+      props.uploadPhoto(e.file);
     }
   };
 
@@ -49,15 +61,38 @@ const ProfileInfo: React.FC<Props> = (props) => {
     return <Loader />;
   } else {
     return (
-      <div>
+      <div style={{ position: 'relative' }}>
         <div className={s.img}>
-          <img
+          <SettingOutlined className={s.settings} />
+          <Image
             src={props.profile.photos.large || defaultAvatar}
             alt="nice avatar"
-            style={{ height: '300px' }}
+            style={{ height: '300px', borderRadius: '8px 8px 0 0' }}
           />
         </div>
-        {props.isOwner && <input type="file" onChange={handleUploadPhoto} />}
+        {props.isOwner && (
+          <label className={s.custom_file_upload}>
+            <input type="file" onChange={handleUploadPhoto} />
+            <InboxOutlined
+              style={{
+                display: 'flex',
+                alignSelf: 'center',
+                fontSize: '40px',
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                bottom: '5%',
+                left: '50%',
+                marginRight: '-50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              Выберите файл
+            </div>
+          </label>
+        )}
 
         {props.profile.fullName && <div>{props.profile.fullName} </div>}
 

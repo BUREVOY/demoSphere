@@ -1,3 +1,38 @@
 .img {
+  position: relative;
   height: 300px;
+}
+
+.custom_file_upload {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: start;
+  opacity: 0.5;
+  width: 300px;
+  height: 75px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #3a3a3a;
+  border: 1px solid #616161;
+  border-radius: 0 0 8px 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.custom_file_upload:hover {
+  background-color: #616161;
+}
+
+input[type='file'] {
+  display: none;
+}
+.settings {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  font-size: 40px;
+  color: aliceblue;
+  opacity: 0.2;
 }

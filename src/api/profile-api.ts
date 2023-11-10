@@ -18,7 +18,6 @@ export const ProfileAPI = {
   uploadPhoto(photo: any) {
     let formData = new FormData();
     formData.append('image', photo);
-
     return instance.put<ResponseType<UploadPhotoType>>(
       `profile/photo/`,
       formData,

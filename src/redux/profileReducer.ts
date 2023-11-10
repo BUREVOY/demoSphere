@@ -146,6 +146,7 @@ export const uploadPhoto =
   (photo: photosType): ThunkType =>
   async (dispatch) => {
     try {
+      
       let response = await ProfileAPI.uploadPhoto(photo);
 
       if (response.data.resultCode === 0) {

@@ -92,5 +92,7 @@ export const stopListeningNewMessages = (): ThunkType => async (dispatch) => {
 export const sendNewMessage =
   (messsage: string): ThunkType =>
   async (dispatch) => {
-    ChatAPI.sendMessage(messsage);
+    await ChatAPI.sendMessage(messsage);
+    stopListeningNewMessages();
+    startListeningNewMessages();
   };
