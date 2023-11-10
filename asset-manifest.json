@@ -1,23 +1,29 @@
 {
   "files": {
-    "main.css": "/demoSphere/static/css/main.77b6a739.css",
-    "main.js": "/demoSphere/static/js/main.bc3d1e4f.js",
-    "static/css/553.f3c68ac7.chunk.css": "/demoSphere/static/css/553.f3c68ac7.chunk.css",
+    "main.css": "/demoSphere/static/css/main.3d8f9933.css",
+    "main.js": "/demoSphere/static/js/main.15638ffa.js",
+    "static/css/553.322bf1bc.chunk.css": "/demoSphere/static/css/553.322bf1bc.chunk.css",
     "static/js/553.cccb60ce.chunk.js": "/demoSphere/static/js/553.cccb60ce.chunk.js",
-    "static/js/344.d6c28b04.chunk.js": "/demoSphere/static/js/344.d6c28b04.chunk.js",
+    "static/js/568.cdc4c62a.chunk.js": "/demoSphere/static/js/568.cdc4c62a.chunk.js",
+    "static/css/765.59b58d54.chunk.css": "/demoSphere/static/css/765.59b58d54.chunk.css",
+    "static/js/765.c25e401d.chunk.js": "/demoSphere/static/js/765.c25e401d.chunk.js",
     "static/js/787.ec704a7a.chunk.js": "/demoSphere/static/js/787.ec704a7a.chunk.js",
+    "static/js/668.eed63495.chunk.js": "/demoSphere/static/js/668.eed63495.chunk.js",
     "static/media/gradient-5812.gif": "/demoSphere/static/media/gradient-5812.460028e7739afd5b703e.gif",
     "static/media/defautltUser.png": "/demoSphere/static/media/defautltUser.b9000249f1bd837a7614.png",
     "index.html": "/demoSphere/index.html",
-    "main.77b6a739.css.map": "/demoSphere/static/css/main.77b6a739.css.map",
-    "main.bc3d1e4f.js.map": "/demoSphere/static/js/main.bc3d1e4f.js.map",
-    "553.f3c68ac7.chunk.css.map": "/demoSphere/static/css/553.f3c68ac7.chunk.css.map",
+    "main.3d8f9933.css.map": "/demoSphere/static/css/main.3d8f9933.css.map",
+    "main.15638ffa.js.map": "/demoSphere/static/js/main.15638ffa.js.map",
+    "553.322bf1bc.chunk.css.map": "/demoSphere/static/css/553.322bf1bc.chunk.css.map",
     "553.cccb60ce.chunk.js.map": "/demoSphere/static/js/553.cccb60ce.chunk.js.map",
-    "344.d6c28b04.chunk.js.map": "/demoSphere/static/js/344.d6c28b04.chunk.js.map",
-    "787.ec704a7a.chunk.js.map": "/demoSphere/static/js/787.ec704a7a.chunk.js.map"
+    "568.cdc4c62a.chunk.js.map": "/demoSphere/static/js/568.cdc4c62a.chunk.js.map",
+    "765.59b58d54.chunk.css.map": "/demoSphere/static/css/765.59b58d54.chunk.css.map",
+    "765.c25e401d.chunk.js.map": "/demoSphere/static/js/765.c25e401d.chunk.js.map",
+    "787.ec704a7a.chunk.js.map": "/demoSphere/static/js/787.ec704a7a.chunk.js.map",
+    "668.eed63495.chunk.js.map": "/demoSphere/static/js/668.eed63495.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.77b6a739.css",
-    "static/js/main.bc3d1e4f.js"
+    "static/css/main.3d8f9933.css",
+    "static/js/main.15638ffa.js"
   ]
 }
