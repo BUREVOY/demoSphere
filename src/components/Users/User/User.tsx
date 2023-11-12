@@ -91,7 +91,7 @@ const User: React.FC<Props> = ({
               alignItems: 'center',
             }}
           >
-            <div>
+            <div style={{ width: '120px', overflow: 'hidden' }}>
               <NavLink to={'/profile/' + item.id}>{item.name}</NavLink>
             </div>
             <div>

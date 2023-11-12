@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
+import { Button } from 'antd';
+import { CloseOutlined } from '@ant-design/icons';
 
 type Props = {
   message: string;
@@ -7,6 +9,7 @@ type Props = {
 };
 
 const Post: React.FC<Props> = (props) => {
+  let handleDelete = () => {};
   return (
     <div className={s.allPost}>
       <div className={s.postImg}>
@@ -16,7 +19,13 @@ const Post: React.FC<Props> = (props) => {
         />
       </div>
       <div className={s.postItem}>
-        {props.message} likes: {props.likes}
+        <div>{props.message}</div>
+        <Button
+          icon={<CloseOutlined />}
+          style={{ background: '#212121', margin: ' 0 0 0 6px' }}
+          onClick={handleDelete}
+          danger
+        ></Button>
       </div>
     </div>
   );

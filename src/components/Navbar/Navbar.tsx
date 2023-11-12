@@ -48,14 +48,14 @@ const Navbar: React.FC = () => {
         >
           <Link to="/profile">Профиль</Link>
         </Menu.Item>
-        <Menu.Item
+        {/* <Menu.Item
           key="2"
           icon={<UnorderedListOutlined />}
           onClick={handleclick}
           style={{ fontFamily: 'Montserrat' }}
         >
           <Link to="/dialogs">Сообщения</Link>
-        </Menu.Item>
+        </Menu.Item> */}
         <Menu.Item
           key="3"
           icon={<UsergroupAddOutlined />}

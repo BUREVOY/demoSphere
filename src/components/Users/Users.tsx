@@ -22,8 +22,9 @@ import { AppDispatch } from '../../redux/reduxStore';
 import { AnyAction } from 'redux';
 import { useLocation } from 'react-router-dom';
 import parseParams from '../../utils/parseParams';
-import { Button, Form, Radio, Select, Space } from 'antd';
+import { Button, Form, Input, Radio, Select, Space } from 'antd';
 import FormItem from 'antd/es/form/FormItem';
+import Search from 'antd/es/input/Search';
 
 type Props = {};
 
@@ -144,7 +145,7 @@ const UsersForm: React.FC<FormProps> = (props) => {
 
   const submit = (
     values: any, //FormType
-    { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void },
+    // { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void },
   ) => {
     // setTimeout(() => {
     //   alert(JSON.stringify(values, null, 2));
@@ -163,7 +164,7 @@ const UsersForm: React.FC<FormProps> = (props) => {
     };
 
     props.onFilterChanged(filter);
-    setSubmitting(false);
+    // setSubmitting(false);
   };
 
   function handleSubmit(e: any) {
@@ -208,11 +209,11 @@ const UsersForm: React.FC<FormProps> = (props) => {
         // labelCol={{ span: 8 }}
         // wrapperCol={{ span: 16 }}
         // style={{ maxWidth: 1200, fontFamily: 'Montserrat' }}
-        // initialValues={{ friend: 'null' }}
+        initialValues={{ friend: 'null' }}
         // autoComplete="off"
         layout="inline"
         // onSubmitCapture={handleSubmit}
-        onFinish={handleSubmit}
+        onFinish={submit}
 
         // onSubmit={props.handleSubmit}
       >
@@ -226,10 +227,18 @@ const UsersForm: React.FC<FormProps> = (props) => {
             </Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item>
+        {/* <Form.Item>
           <Button type="primary" htmlType="submit">
-            Отправить
+            Поиск
           </Button>
+        </Form.Item> */}
+        <Form.Item name="term">
+          <Space.Compact style={{ width: '100%' }}>
+            <Input placeholder="Имя пользователя" />
+            <Button type="primary" htmlType="submit">
+              Поиск
+            </Button>
+          </Space.Compact>
         </Form.Item>
       </Form>
     </>

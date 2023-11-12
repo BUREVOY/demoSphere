@@ -9,7 +9,7 @@ import { reduxForm } from 'redux-form';
 import { profileType } from '../../../Types/types';
 import Dragger from 'antd/es/upload/Dragger';
 import { InboxOutlined, SettingOutlined } from '@ant-design/icons';
-import { Image } from 'antd';
+import { Button, Image } from 'antd';
 
 const defaultAvatar = require('../../../assets/images/defautltUser.png');
 
@@ -56,66 +56,95 @@ const ProfileInfo: React.FC<Props> = (props) => {
       })
       .catch(() => {});
   };
+  console.log(props.profile);
 
   if (!props.profile) {
     return <Loader />;
   } else {
     return (
-      <div style={{ position: 'relative' }}>
-        <div className={s.img}>
-          <SettingOutlined className={s.settings} />
-          <Image
-            src={props.profile.photos.large || defaultAvatar}
-            alt="nice avatar"
-            style={{ height: '300px', borderRadius: '8px 8px 0 0' }}
-          />
-        </div>
-        {props.isOwner && (
-          <label className={s.custom_file_upload}>
-            <input type="file" onChange={handleUploadPhoto} />
-            <InboxOutlined
-              style={{
-                display: 'flex',
-                alignSelf: 'center',
-                fontSize: '40px',
-              }}
+      <div style={{ position: 'relative', display: 'flex' }}>
+        <div className={s.upperLeftSide}>
+          <div className={s.img}>
+            <SettingOutlined className={s.settings} />
+            <Image
+              src={props.profile.photos.large || defaultAvatar}
+              alt="nice avatar"
+              style={{ height: '300px', borderRadius: '8px 8px 0 0' }}
             />
-            <div
+          </div>
+          {props.isOwner && (
+            <label className={s.custom_file_upload}>
+              <input type="file" onChange={handleUploadPhoto} />
+              <InboxOutlined
+                style={{
+                  display: 'flex',
+                  alignSelf: 'center',
+                  fontSize: '40px',
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: '5%',
+                  left: '50%',
+                  marginRight: '-50%',
+                  transform: 'translate(-50%, -50%)',
+                }}
+              >
+                Выберите файл
+              </div>
+            </label>
+          )}
+        </div>
+
+        <div className={s.upperRightSide}>
+          {props.profile.fullName && (
+            <h1
               style={{
-                position: 'absolute',
-                bottom: '5%',
-                left: '50%',
-                marginRight: '-50%',
-                transform: 'translate(-50%, -50%)',
+                color: 'aliceblue', //'#888C90',
+                fontFamily: 'Montserrat',
+                fontWeight: '500',
+                letterSpacing: 4,
               }}
             >
-              Выберите файл
-            </div>
-          </label>
-        )}
+              {props.profile.fullName}
+            </h1>
+          )}
 
-        {props.profile.fullName && <div>{props.profile.fullName} </div>}
-
-        <ProfileStatusFunc
-          {...props}
-          status={props.status}
-          setStatus={props.setStatus}
-          updateStatus={props.updateStatus}
-        />
-
-        {editMode ? (
-          <EditProfileDataRedux
-            initialValues={props.profile}
-            onSubmit={onSubmit}
-            profile={props.profile}
+          <ProfileStatusFunc
+            {...props}
+            status={props.status}
+            setStatus={props.setStatus}
+            updateStatus={props.updateStatus}
           />
-        ) : (
-          <ProfileData
-            isOwner={props.isOwner}
-            profile={props.profile}
-            handleEditMode={handleEditMode}
-          />
-        )}
+
+          {props.profile.aboutMe && (
+            <h3
+              style={{
+                color: 'aliceblue',
+                fontFamily: 'Montserrat',
+                fontWeight: '500',
+                margin: '6px 6px 6px 0',
+              }}
+            >
+              {props.profile.aboutMe}
+            </h3>
+          )}
+
+          {editMode ? (
+            <EditProfileDataRedux
+              initialValues={props.profile}
+              onSubmit={onSubmit}
+              profile={props.profile}
+            />
+          ) : (
+            <ProfileData
+              isOwner={props.isOwner}
+              profile={props.profile}
+              handleEditMode={handleEditMode}
+            />
+          )}
+        </div>
       </div>
     );
   }
@@ -129,7 +158,7 @@ const ProfileData: React.FC<PropsProfileData> = (props) => {
   return (
     <>
       {props.isOwner ? (
-        <button onClick={props.handleEditMode}>Изменить</button>
+        <Button onClick={props.handleEditMode}>Изменить</Button>
       ) : null}
       {props.profile.lookingForAJob ? (
         <div>ищу работу</div>
@@ -137,11 +166,11 @@ const ProfileData: React.FC<PropsProfileData> = (props) => {
         <div>устроился на работу</div>
       )}
 
-      {Object.values(props.profile.contacts).map((contact) => {
+      {/* {Object.values(props.profile.contacts).map((contact) => {
         return contact !== null ? <div key={contact}>{contact}</div> : null;
-      })}
+      })} */}
 
-      <span>контакты: </span>
+      {/* <span>контакты: </span>
 
       {Object.entries(props.profile.contacts).map((key) => {
         return (
@@ -149,7 +178,7 @@ const ProfileData: React.FC<PropsProfileData> = (props) => {
             <div>{key[1] !== null ? <div>{key[0]}</div> : null}</div>
           </Fragment>
         );
-      })}
+      })} */}
     </>
   );
 };

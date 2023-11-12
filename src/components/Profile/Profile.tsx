@@ -37,7 +37,7 @@ const Profile: React.FC<MapStateProps & MapDispatch> = ({
         updateStatus={updateStatus}
         saveProfile={saveProfile}
       />
-      <MypostsContainer />
+      {/* <MypostsContainer /> */}
     </div>
   );
 };

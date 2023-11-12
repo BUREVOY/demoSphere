@@ -1,3 +1,4 @@
+import { Input } from 'antd';
 import React, { ChangeEvent, useState } from 'react';
 
 type Props = {
@@ -24,7 +25,15 @@ let ProfileStatusFunc: React.FC<Props> = (props) => {
     <>
       {editMode ? (
         <div>
-          <input
+          {/* <input
+            type="text"
+            value={props.status}
+            autoFocus={true}
+            onBlur={deactivateEditMode}
+            onChange={onStatusChange}
+          /> */}
+          <Input
+            placeholder="Basic usage"
             type="text"
             value={props.status}
             autoFocus={true}
@@ -34,7 +43,17 @@ let ProfileStatusFunc: React.FC<Props> = (props) => {
         </div>
       ) : (
         <div>
-          <div onClick={activateEditMode}>{props.status || 'Нет статуса'}</div>
+          <h2
+            onClick={activateEditMode}
+            style={{
+              color: 'aliceblue',
+              fontFamily: 'Montserrat',
+              fontWeight: '500',
+              margin: '6px 6px 6px 0',
+            }}
+          >
+            {props.status || 'Нет статуса'}
+          </h2>
         </div>
       )}
     </>
