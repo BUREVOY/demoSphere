@@ -98,15 +98,19 @@ const LoginForm: React.FC<
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
-        style={{ maxWidth: 600, color: 'aliceblue', fontFamily: 'Montserrat' }}
-        initialValues={{ remember: true }}
+        style={{ maxWidth: 800, color: 'aliceblue', fontFamily: 'Montserrat' }}
+        initialValues={{
+          remember: true,
+          email: 'free@samuraijs.com',
+          password: 'free',
+        }}
         autoComplete="off"
         onSubmitCapture={handleSubmit}
 
         // onSubmit={props.handleSubmit}
       >
         <Form.Item
-          label="Почта"
+          label="Почта (free@samuraijs.com)"
           name="email"
           rules={[
             { required: true, message: 'Пожалуйста, введите ваш email!' },
@@ -116,7 +120,7 @@ const LoginForm: React.FC<
         </Form.Item>
 
         <Form.Item
-          label="Пароль"
+          label="Пароль (free)"
           name="password"
           rules={[
             { required: true, message: 'Пожалуйста, введите ваш пароль!' },
